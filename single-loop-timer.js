@@ -54,3 +54,4 @@ class TimerObject {
         }
     }
 }
+const slTimer = new SingleLoopTimer()
