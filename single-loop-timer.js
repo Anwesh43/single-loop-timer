@@ -28,15 +28,18 @@ class SingleLoopTimer {
     }
     createTimer(limit,updatecb) {
         const timerObject = new TimerObject(limit,updatecb,this.n)
+        timerObject.setParent(this)
         this.n++
         this.timers.push(timerObject)
+        console.log(this.timers)
         return timerObject
     }
 }
 class TimerObject {
-    constructor(limit,updatecb,i) {
+    constructor(interval,updatecb,i) {
         this.t = 0
         this.updatecb = updatecb
+        this.interval = interval
         this.i = i
     }
     setParent(parent) {
@@ -44,7 +47,7 @@ class TimerObject {
     }
     execute() {
         this.t++
-        if(this.t == this.limit) {
+        if(this.t % this.interval == 0) {
             this.updatecb()
         }
     }
